@@ -1,2 +1,2 @@
 # sandbox
-Common sandbox to evaluate very simple cases
+自分用のSandboxなので残したい検討したものはここに残していくことにする
