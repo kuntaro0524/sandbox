@@ -1,43 +1,21 @@
-import axios from "axios";
-import { useContext, useState } from "react";
-
-import { QuizInfo } from "./QuizInfo";
+import { useContext } from "react";
 import { QuizContext } from "./providers/QuizProvider";
+import axios from "axios";
+import { QuizInfo } from "./QuizInfo";
 
-export const useKuntaro = () => {
-  let curr_quiz_index = 0;
-  const [isRead, setIsRead] = useState(false);
-  //   const [quizInfo, setQuizInfo] = useState<QuizInfo[]>([]);
-  const { quizInfo, setQuizInfo } = useContext(QuizContext);
-  const useUnko = () => {
-    console.log("Print useUnko was done");
-  };
+export const useQuiz = () => {
+  const { quizList, setQuizList } = useContext(QuizContext);
 
-  const nextQuiz = () => {
-    curr_quiz_index += 1;
-  };
-
-  const prevQuiz = () => {
-    curr_quiz_index -= 1;
-  };
-
-  const isReadDB = () => {
-    return isRead;
-  };
-
-  //   databaseのAPIからデータを取得してくる
-  const fetchQuizes = () => {
+  const getQuiz = () => {
     axios
-      .get<QuizInfo[]>("http://localhost:9201/quiz", {
+      .get<Array<QuizInfo>>("http://localhost:9201/quiz", {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
       })
-
       .then((res) => {
-        setQuizInfo(res.data);
-        setIsRead(true);
         console.log(res.data);
+        setQuizList(res.data);
       })
       .catch(function (error) {
         console.log("ERROR?");
@@ -65,12 +43,5 @@ export const useKuntaro = () => {
       });
   };
 
-  const fetchCurrQuiz = () => {
-    const currQ = quizInfo[curr_quiz_index];
-    console.log(currQ);
-
-    return currQ;
-  };
-
-  return { isRead, isReadDB, useUnko, fetchQuizes, fetchCurrQuiz };
+  return { quizList, setQuizList, getQuiz };
 };
