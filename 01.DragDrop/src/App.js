@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useState } from 'react';
 
 function App() {
-  const [items, setItems] = useState(["koko0", "koko1", "koko2"]);
+  const [items, setItems] = useState([{id:1, text:"item0"}, {id:2, text:"item1"}, {id:3, text:"item2"}]);
   const onDragEnd =(result)=>{
     const new_items = [...items];
     // 動かしたところを一個削除する
@@ -23,15 +23,18 @@ function App() {
           // 何番目のドラッガブルか？
           // 掴んで移動させたいとき: dragHandleProps を追加すること 
           <div {...provided.droppableProps} ref={provided.innerRef}>
-          <Draggable draggableId="item0" index={0}>{(provided)=><div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="item"> 
-          {items[0]}</div>}
+            {items.map((item, index)=>(
+          <Draggable draggableId={item.text} index={index} key={item.id}>
+            {(provided)=>
+              <div 
+                ref={provided.innerRef} 
+                {...provided.draggableProps} 
+                {...provided.dragHandleProps} 
+                className="item"> 
+                {item.text}
+              </div>}
           </Draggable>
-          <Draggable  draggableId="item1" index={1}>{(provided)=><div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="item"> 
-          {items[1]}</div>}
-          </Draggable>
-          <Draggable  draggableId="item2" index={2}>{(provided)=><div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="item"> 
-          {items[2]}</div>}
-          </Draggable>
+            ))}
           {/* お作法として書かないとWarningがでる */}
           {provided.placeholder}
           </div>
