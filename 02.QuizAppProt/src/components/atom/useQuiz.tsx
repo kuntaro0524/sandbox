@@ -2,9 +2,13 @@ import axios from "axios";
 import { useCallback, useContext } from "react";
 import { QuizContext } from "./provider/QuizProvider";
 import { QuizType } from "./type/QuitType";
+import { QuizIndexContext } from "./provider/QindexProvider";
 
 export const useQuiz = () => {
   const { quizInfo, setQuizInfo } = useContext(QuizContext);
+
+  // Quiz indexの保持
+  const { quizIndex, setQuizIndex } = useContext(QuizIndexContext);
 
   const getQuiz = useCallback(() => {
     axios
@@ -42,5 +46,5 @@ export const useQuiz = () => {
       });
   }, []);
 
-  return { quizInfo, setQuizInfo, getQuiz };
+  return { quizInfo, setQuizInfo, getQuiz, quizIndex, setQuizIndex };
 };
