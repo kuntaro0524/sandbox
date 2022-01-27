@@ -4,19 +4,11 @@ import "./App.css";
 import { QuizProvider } from "./components/atom/provider/QuizProvider";
 import { QuizDisp } from "./components/atom/QuizDisp";
 import { useQuiz } from "./components/atom/useQuiz";
-import { QuizIndexProvider } from "./components/atom/provider/QindexProvider";
 import { QuizStatusProvider } from "./components/atom/provider/QuizStatusProvider";
 
 const MyCompo = () => {
-  const {
-    quizInfo,
-    setQuizInfo,
-    getQuiz,
-    quizIndex,
-    setQuizIndex,
-    quizStatus,
-    setQuizStatus,
-  } = useQuiz();
+  const { quizInfo, setQuizInfo, getQuiz, quizStatus, setQuizStatus } =
+    useQuiz();
 
   // 初期設定
   let initial_status = {
@@ -31,7 +23,12 @@ const MyCompo = () => {
   }, []);
 
   const onClicken = () => {
-    setQuizIndex(quizIndex + 1);
+    const new_index = quizStatus.quizIndex + 1;
+    setQuizStatus({
+      quizIndex: new_index,
+      isAnswered: true,
+      isCorrect: true,
+    });
   };
 
   return (
@@ -46,14 +43,12 @@ function App() {
   return (
     <div className="App">
       <QuizProvider>
-        <QuizIndexProvider>
-          <QuizStatusProvider>
-            <header className="App-header">
-              <h1> Quiz application </h1>
-              <MyCompo />
-            </header>
-          </QuizStatusProvider>
-        </QuizIndexProvider>
+        <QuizStatusProvider>
+          <header className="App-header">
+            <h1> Quiz application </h1>
+            <MyCompo />
+          </header>
+        </QuizStatusProvider>
       </QuizProvider>
     </div>
   );
