@@ -1,18 +1,18 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, VFC } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import {
   QuizContext,
   QuizProvider,
 } from "./components/atom/provider/QuizProvider";
+import { QuizType } from "./components/atom/type/QuitType";
 import { useQuiz } from "./components/atom/useQuiz";
 
-const MyCompo = () => {
-  const { quizInfo, setQuizInfo, getQuiz } = useQuiz();
-  useEffect(() => {
-    getQuiz();
-  });
-  console.log(quizInfo);
+type Props = { quizInfo: QuizType[] };
+
+const QuizDisp: VFC<Props> = (props) => {
+  const { quizInfo } = props;
+
   return (
     <div>
       {quizInfo.map((component) => (
@@ -21,6 +21,18 @@ const MyCompo = () => {
           <li> {component.answer} </li>
         </ol>
       ))}
+    </div>
+  );
+};
+
+const MyCompo = () => {
+  const { quizInfo, setQuizInfo, getQuiz } = useQuiz();
+  useEffect(() => {
+    getQuiz();
+  }, []);
+  return (
+    <div>
+      <QuizDisp quizInfo={quizInfo} />
     </div>
   );
 };
