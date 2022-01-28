@@ -5,6 +5,7 @@ import { QuizProvider } from "./components/atom/provider/QuizProvider";
 import { QuizDisp } from "./components/atom/QuizDisp";
 import { useQuiz } from "./components/atom/useQuiz";
 import { QuizStatusProvider } from "./components/atom/provider/QuizStatusProvider";
+import { Button, ChakraProvider } from "@chakra-ui/react";
 
 const MyCompo = () => {
   const { quizInfo, setQuizInfo, getQuiz, quizStatus, setQuizStatus } =
@@ -34,7 +35,9 @@ const MyCompo = () => {
   return (
     <div>
       <QuizDisp />
-      <button onClick={onClicken}> push me </button>
+      <Button colorScheme="blue" onClick={onClicken}>
+        PUSHPUSH
+      </Button>
     </div>
   );
 };
@@ -42,14 +45,16 @@ const MyCompo = () => {
 function App() {
   return (
     <div className="App">
-      <QuizProvider>
-        <QuizStatusProvider>
-          <header className="App-header">
-            <h1> Quiz application </h1>
-            <MyCompo />
-          </header>
-        </QuizStatusProvider>
-      </QuizProvider>
+      <ChakraProvider>
+        <QuizProvider>
+          <QuizStatusProvider>
+            <header className="App-header">
+              <h1> Quiz application </h1>
+              <MyCompo />
+            </header>
+          </QuizStatusProvider>
+        </QuizProvider>
+      </ChakraProvider>
     </div>
   );
 }
