@@ -27,7 +27,7 @@ const MyCompo = () => {
     const new_index = quizStatus.quizIndex + 1;
     setQuizStatus({
       quizIndex: new_index,
-      isAnswered: true,
+      isAnswered: false,
       isCorrect: true,
     });
   };
