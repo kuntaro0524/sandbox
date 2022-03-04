@@ -1,7 +1,7 @@
 import * as React from "react";
 import useMouse from "@react-hook/mouse-position";
 import { Box, Stack } from "@chakra-ui/react";
-import { useKeys } from "./hooks/useKeys";
+import { useKeys } from "../hooks/useKeys";
 
 export const Compo1 = () => {
   const ref = React.useRef(null);

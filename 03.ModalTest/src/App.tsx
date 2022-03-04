@@ -10,8 +10,10 @@ import axios from "axios";
 import "./App.css";
 
 import { Box, ChakraProvider, useDisclosure } from "@chakra-ui/react";
-import { Compo1 } from "./components/Compo1";
-import { ShiftKey } from "./components/ShiftKey";
+import { Compo1 } from "./components/atoms/Compo1";
+import { ShiftKey } from "./components/atoms/ShiftKey";
+import { CheckTable } from "./components/atoms/CheckTable";
+import { TabTable } from "./components/molecules/TabTable";
 
 // Modal related
 import {
@@ -87,6 +89,8 @@ function App() {
           <Box>
             <Compo1 />
             <ShiftKey />
+            <CheckTable />
+            <TabTable />
           </Box>
         </header>
         <Modal isOpen={isOpen} onClose={onClose}>
