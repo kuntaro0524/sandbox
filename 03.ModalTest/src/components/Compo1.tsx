@@ -1,6 +1,7 @@
 import * as React from "react";
 import useMouse from "@react-hook/mouse-position";
-import { Box } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
+import { useKeys } from "./hooks/useKeys";
 
 export const Compo1 = () => {
   const ref = React.useRef(null);
@@ -9,14 +10,17 @@ export const Compo1 = () => {
     leaveDelay: 100,
   });
 
+  const { key } = useKeys();
+
   return (
-    // You must provide the ref to the element you're tracking the
-    // mouse position of
-    <Box h="200px" v="200px" ref={ref}>
-      Hover me and see where I am relative to the element:
-      <br />
-      x: ${mouse.x}
-      y: ${mouse.y}
-    </Box>
+    <Stack>
+      <Box bg="teal" h="200px" v="200px" ref={ref}>
+        Boxで指定している領域の中の相対座標を取得することができるわけだが
+        <br />
+        <p>x: ${mouse.x}</p>
+        <p>y: ${mouse.y}</p>
+      </Box>
+      <p>{key}</p>
+    </Stack>
   );
 };

@@ -1,12 +1,16 @@
-import React, { useEffect, useCallback } from "react";
+import { Box } from "@chakra-ui/react";
+import React, { useEffect, useCallback, useState } from "react";
 
 export const ShiftKey = () => {
+  const [key, setKey] = useState("");
   const escFunction = useCallback((event) => {
     console.log("今押しているのは" + event.keyCode);
+    setKey(event.keyCode);
 
-    if (event.keyCode === 27) {
+    if (event.keyCode === 16) {
       // キーコードを判定して何かする。
-      console.log("Esc Key is pressed!");
+      console.log("Shift Key is pressed!");
+      setKey("Shift");
     }
   }, []);
 
@@ -14,5 +18,5 @@ export const ShiftKey = () => {
     document.addEventListener("keydown", escFunction, false);
   }, []);
 
-  return <input />;
+  return <Box>{key}</Box>;
 };
