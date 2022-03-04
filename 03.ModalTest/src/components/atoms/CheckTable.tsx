@@ -1,38 +1,67 @@
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { CustomCheckbox } from "../atoms/CustomCheckbox";
+
+const conds = [
+  {
+    puckid: "CPS1999",
+    sample_name: "Complex",
+    pinid: 1,
+    dist: 100.0,
+    exp_time: 0.02,
+    crystal_size: 10.0,
+  },
+  {
+    puckid: "CPS1192",
+    sample_name: "Kamakura",
+    pinid: 1,
+    dist: 100.0,
+    exp_time: 0.02,
+    crystal_size: 10.0,
+  },
+  {
+    puckid: "CPS1837",
+    sample_name: "Naosuke",
+    pinid: 1,
+    dist: 100.0,
+    exp_time: 0.02,
+    crystal_size: 10.0,
+  },
+];
 
 export const CheckTable = () => {
+  const keys = Object.keys(conds[0]);
+  console.log(keys);
+
   return (
     <>
       <Table size="sm">
         <Thead>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            <Tr>Checkbox</Tr>
+            {keys.map((key) => (
+              <Th> {key} </Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+          {conds.map((cond) => (
+            <Tr>
+              <CustomCheckbox />
+              <Td>{cond.puckid}</Td>
+              <Td>{cond.sample_name}</Td>
+              <Td>{cond.pinid}</Td>
+              <Td>{cond.dist}</Td>
+              <Td>{cond.exp_time}</Td>
+              <Td>{cond.crystal_size}</Td>
+            </Tr>
+          ))}
         </Tbody>
         <Tfoot>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            {keys.map((key) => (
+              <Th>{key}</Th>
+            ))}
           </Tr>
         </Tfoot>
       </Table>
