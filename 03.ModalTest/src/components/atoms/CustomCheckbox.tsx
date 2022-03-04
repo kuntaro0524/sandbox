@@ -5,6 +5,8 @@ export const CustomCheckbox = () => {
   const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
     useCheckbox();
 
+  console.log(state);
+
   return (
     <chakra.label
       display="flex"

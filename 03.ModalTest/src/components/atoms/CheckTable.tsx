@@ -1,6 +1,7 @@
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { CustomCheckbox } from "../atoms/CustomCheckbox";
+import { NormalCheckbox } from "../atoms/NormalCheckbox";
 
 const conds = [
   {
@@ -48,6 +49,10 @@ export const CheckTable = () => {
           {conds.map((cond) => (
             <Tr>
               <CustomCheckbox />
+              <NormalCheckbox
+                id={`${cond.puckid}-${cond.pinid}`}
+                isChecked={false}
+              />
               <Td>{cond.puckid}</Td>
               <Td>{cond.sample_name}</Td>
               <Td>{cond.pinid}</Td>
