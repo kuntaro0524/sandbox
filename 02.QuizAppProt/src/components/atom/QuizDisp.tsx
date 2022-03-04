@@ -36,8 +36,10 @@ export const QuizDisp: VFC = () => {
 
     if (inputAnswer === correct_answer) {
       console.log("CORRECT!");
+      setQuizStatus({ ...quizStatus, isCorrect: true });
     } else {
       console.log("Wrong!");
+      setQuizStatus({ ...quizStatus, isCorrect: false });
     }
   };
 
